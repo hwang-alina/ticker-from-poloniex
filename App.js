@@ -5,6 +5,7 @@ import {
 } from "react-navigation";
 import HomeScreen from "./screens/HomeScreen.js";
 import TickerScreen from "./screens/TickerScreen";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 const RootStack = createBottomTabNavigator(
   {
@@ -18,17 +19,25 @@ const RootStack = createBottomTabNavigator(
     }
   },
   {
-    navigationOptions: {
-      header: {
-        visible: true
+    navigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused, tintColor }) => {
+        const { routeName } = navigation.state;
+        let iconName;
+        if (routeName === "Home") {
+          iconName = `ios-home${focused ? "" : "-outline"}`;
+        } else if (routeName === "Ticker") {
+          iconName = `ios-grid${focused ? "" : "-outline"}`;
+        }
+
+        // You can return any component that you like here! We usually use an
+        // icon component from react-native-vector-icons
+        return <Ionicons name={iconName} size={28} color={tintColor} />;
       }
-    },
-    tabBarOptions: {
-      tabStyle: {
-        flex: 1,
-        justifyContent: "center"
-      }
-    }
+    }),
+    // tabBarOptions: {
+    //   activeTintColor: "tomato",
+    //   inactiveTintColor: "gray"
+    // }
   }
 );
 
