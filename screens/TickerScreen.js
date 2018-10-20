@@ -51,52 +51,30 @@ export default class TickerScreen extends React.Component {
   render() {
     if (this.state.isLoading) {
       return (
-        <View
-          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-        >
+        <View style={styles.loader}>
           <ActivityIndicator />
         </View>
       );
     } else {
       const keys = Object.keys(this.state.dataSource);
-      let tickersNames = keys.map((key, i) => {
+      let tickers = keys.map((key, i) => {
         return (
-          <View key={i}>
+          <View key={i} style={styles.row}>
             <Text style={styles.text}>{key}</Text>
-          </View>
-        );
-      });
-      let last = keys.map((key, i) => {
-        return (
-          <View key={i}>
             <Text style={styles.text}>{this.state.dataSource[key].last}</Text>
-          </View>
-        );
-      });
-      let highestBid = keys.map((key, i) => {
-        return (
-          <View key={i}>
             <Text style={styles.text}>
               {this.state.dataSource[key].highestBid}
             </Text>
-          </View>
-        );
-      });
-      let percentChange = keys.map((key, i) => {
-        return (
-          <View key={i}>
             <Text style={styles.text}>
               {this.state.dataSource[key].percentChange}
             </Text>
           </View>
         );
       });
+
       return (
         <ScrollView contentContainerStyle={styles.container}>
-          <View style={styles.column}>{tickersNames}</View>
-          <View style={styles.column}>{last}</View>
-          <View style={styles.column}>{highestBid}</View>
-          <View style={styles.column}>{percentChange}</View>
+          {tickers}
         </ScrollView>
       );
     }
@@ -105,17 +83,24 @@ export default class TickerScreen extends React.Component {
 const styles = StyleSheet.create({
   column: {},
   container: {
-    flexDirection: "row",
-    marginTop: 20,
-    marginHorizontal: 20,
-    justifyContent: "space-between"
+    marginHorizontal: 10
   },
   row: {
     flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between"
+  },
+  loader: {
+    flex: 1,
     alignItems: "center",
-    alignSelf: "stretch"
+    justifyContent: "center"
   },
   text: {
-    fontSize: 10
+    flex: 0.25,
+    fontSize: 11,
+    borderWidth: 0.5,
+    borderColor: "grey",
+    paddingVertical: 1,
+    paddingHorizontal: 3
   }
 });

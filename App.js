@@ -22,6 +22,12 @@ const RootStack = createBottomTabNavigator(
       header: {
         visible: true
       }
+    },
+    tabBarOptions: {
+      tabStyle: {
+        flex: 1,
+        justifyContent: "center"
+      }
     }
   }
 );
