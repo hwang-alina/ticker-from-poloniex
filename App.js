@@ -28,16 +28,9 @@ const RootStack = createBottomTabNavigator(
         } else if (routeName === "Ticker") {
           iconName = `ios-grid${focused ? "" : "-outline"}`;
         }
-
-        // You can return any component that you like here! We usually use an
-        // icon component from react-native-vector-icons
         return <Ionicons name={iconName} size={28} color={tintColor} />;
       }
-    }),
-    // tabBarOptions: {
-    //   activeTintColor: "tomato",
-    //   inactiveTintColor: "gray"
-    // }
+    })
   }
 );
 
